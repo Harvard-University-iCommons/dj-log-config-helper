@@ -18,24 +18,31 @@ Meta
 
 Installation
 ------------
-.. code-block:: bash
+Simply run the following from within a virtualenv::
 
     $ pip install git+https://github.com/Harvard-University-iCommons/dj-log-config-helper
 
 Running the tests
 -----------------
-.. code-block:: bash
+Via make::
 
     $ make test
 
-Quick start
-------------
-Within your project's ``settings.py`` file:
+Usage
+-----
+Import the log config function in ``settings.py``::
 
-1.  import the log config function::
+    from dj_log_config_helper import configure_installed_apps_logger
 
-    ``from dj_log_config_helper import configure_installed_apps_logger``
-2.  Set ``LOGGING_CONFIG = None``
-3.  At the end of your settings file, configure logging::
+Disable Django's default logging::
 
-    ``configure_installed_apps_logger(logging.INFO, verbose=True, filename='django-project.log')``
+    LOGGING_CONFIG = None
+
+At the end of ``settings.py`` configure a simple console logger::
+    
+    configure_installed_app_logger(logging.INFO)
+    
+
+Or, configure a verbose file logger::
+
+    configure_installed_apps_logger(logging.INFO, verbose=True, filename='django-project.log')
