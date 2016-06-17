@@ -1,5 +1,10 @@
-# dj-log-config-helper
-Centralize management of log configuration across Django projects
+====================
+Dj-Log-Config-Helper
+====================
+
+Centralize management of simple log configuration across Django projects
+
+The `dj_log_config_helper.configure_installed_apps_logger` method configures either a console or file logger with a list of all the top-level app module packages being installed in `INSTALLED_APPS`.  Use this method in your `settings.py` file.
 
 Meta
 ----
@@ -15,7 +20,7 @@ Installation
 ------------
 .. code-block:: bash
 
-    $ pip install pip install git+https://github.com/Harvard-University-iCommons/dj-log-config-helper
+    $ pip install git+https://github.com/Harvard-University-iCommons/dj-log-config-helper
 
 Running the tests
 -----------------
