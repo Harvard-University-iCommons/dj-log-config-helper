@@ -24,7 +24,8 @@ Installation
 
 Running the tests
 -----------------
-After installing inside of a virtualenv run the following::
+.. code-block:: bash
+
     $ make test
 
 Quick start
