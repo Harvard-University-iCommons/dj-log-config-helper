@@ -16,7 +16,7 @@ setup(
     url='https://github.com/Harvard-University-iCommons/dj-log-config-helper',
     author='Jaime Bermudez',
     author_email='jaime_bermudez@harvard.edu',
-    description='Centralize management of log configuration across Django projects',
+    description='Simplify log configuration across Django projects',
     long_description=readme,
     include_package_data=True,
     license=license,
