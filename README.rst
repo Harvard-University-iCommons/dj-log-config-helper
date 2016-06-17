@@ -31,6 +31,7 @@ Running the tests
 Quick start
 ------------
 Within your project's ``settings.py`` file:
+
 1.  import the log config function::
     from dj_log_config_helper import configure_installed_apps_logger
 2.  Set ``LOGGING_CONFIG = None``
