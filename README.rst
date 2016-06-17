@@ -34,8 +34,8 @@ Within your project's ``settings.py`` file:
 
 1.  import the log config function::
 
-    from dj_log_config_helper import configure_installed_apps_logger
+    ``from dj_log_config_helper import configure_installed_apps_logger``
 2.  Set ``LOGGING_CONFIG = None``
 3.  At the end of your settings file, configure logging::
 
-    configure_installed_apps_logger(logging.INFO, verbose=True, filename='django-project.log')
+    ``configure_installed_apps_logger(logging.INFO, verbose=True, filename='django-project.log')``
