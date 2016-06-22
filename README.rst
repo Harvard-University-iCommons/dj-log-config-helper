@@ -40,7 +40,7 @@ Disable Django's default logging::
 
 At the end of ``settings.py`` configure a simple console logger::
     
-    configure_installed_app_logger(logging.INFO)
+    configure_installed_apps_logger(logging.INFO)
     
 
 Or, configure a verbose file logger::
