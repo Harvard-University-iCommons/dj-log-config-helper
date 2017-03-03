@@ -1,0 +1,22 @@
+---
+language: python
+python:
+  - "2.7"
+
+# Use container infra
+sudo: false
+
+env:
+  - DJANGO_VERSION=1.10.6
+  - DJANGO_VERSION=1.9.12
+  - DJANGO_VERSION=1.8.17
+
+install:
+  # Install specific Django version
+  - pip install Django==$DJANGO_VERSION
+
+script:
+  - make test
+
+notifications:
+  slack: tlt:KyqrXDeFkXKb72AsDYTwWkNp
