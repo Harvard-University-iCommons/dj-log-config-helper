@@ -1,22 +1,23 @@
----
 language: python
 python:
-  - "2.7"
-
-# Use container infra
+- '2.7'
 sudo: false
-
 env:
-  - DJANGO_VERSION=1.10.6
-  - DJANGO_VERSION=1.9.12
-  - DJANGO_VERSION=1.8.17
-
+- DJANGO_VERSION=1.10.6
+- DJANGO_VERSION=1.9.12
+- DJANGO_VERSION=1.8.17
 install:
-  # Install specific Django version
-  - pip install Django==$DJANGO_VERSION
-
+- pip install Django==$DJANGO_VERSION
 script:
-  - make test
-
+- make test
 notifications:
   slack: tlt:KyqrXDeFkXKb72AsDYTwWkNp
+deploy:
+  provider: pypi
+  user: tlt_opensource
+  password:
+    secure: EpwpuJyk4HydSAPdBwCULoC0BVUA3q+pxmQQIVmrHdDYroWVUfiFXL2tj9RhQa6zp9Xrwp8naz97Hp8lhFwi+jNeq4ZLSTD1UMvvcP+H8ncFWe/nEwmJs/89GRegyV/dtEYAIM7vp0AIGldHcaFh9pzItuNLBdsuybwGzLoRgidXnNu3qKzFJKaOZV8SNjoBzm2NdMbo+NWOr/btgng3p1jGZEMgh52riROwUYx8SUGjieJuQ86FlOIET3OVZ9bY0kmvNRzMe1XqQP+eSCvE9PrmycvY4V2RtmXzqPfvgYXn+MdWz2imeoxvNt1FV4UjJZUyG3dvMsk2H23jEzwhU3e7b9wE7V8TMWEFVgE98vW6a0HHbWLNBMZEaBMMzCYTwMZ69Ojjtelt5dNmLKpmFjN2Pg/RDZsSZ7b4vav/9ktDCFaLbY3mAq7MRMU8nrE+mlzcrPeNtn/jvfKlKYTnFhZg9gTqBoJKlhlY2z+XBRP4lZgBM3hGT85aE5IXWMrPsnhIbOWjpUSH5CMZUTXOSyFWXYjG/nteygwCzn6DISrpd2qApHrlhDCiJdG/0tQ+D6EilpXuCRCSNb3hyA5tEFUZznwsn7gnraFBulDwNFhw9wdket6SYzlD+BtbAaAoLw9PhPIrg+81XwTcnrSPdN1qpXZTmMg3a+RPfkjKdZI=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: Harvard-University-iCommons/dj-log-config-helper
