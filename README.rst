@@ -39,10 +39,13 @@ Disable Django's default logging::
     LOGGING_CONFIG = None
 
 At the end of ``settings.py`` configure a simple console logger::
-    
+
     configure_installed_apps_logger(logging.INFO)
-    
 
 Or, configure a verbose file logger::
 
     configure_installed_apps_logger(logging.INFO, verbose=True, filename='django-project.log')
+
+You can also log additional packages that are not part of INSTALLED_APPS::
+
+    configure_installed_apps_logger(logging.INFO, additional_packages=['py.warnings'])

@@ -52,14 +52,13 @@ def _normalize_apps(apps_list):
     return {app.split('.')[0] for app in apps_list}
 
 
-def build_normalized_app_loggers(log_level, apps_list, handlers=None):
+def build_app_loggers(log_level, apps, handlers=None):
     """ Return a logger dict for app packages with the given log level and no
     propogation since the apps list is parsed/normalized to be the set of top-
     level apps.  The optional handlers argument is provided so that this pattern
     of app loggers can be used independently of the configure_logger method
     below, if desired.
     """
-    apps = _normalize_apps(apps_list)
 
     # Use 'default' handler provided by DEFAULT_LOGGING config if
     # not supplied.
@@ -82,7 +81,7 @@ def build_normalized_app_loggers(log_level, apps_list, handlers=None):
     return app_loggers
 
 
-def _build_config(level, apps_list, verbose, filename=None):
+def _build_logging_config(level, apps_list, verbose, filename=None):
     """ Return a copy of the DEFAULT_LOGGING config with installed application
     loggers at the given log level.  The 'default' handler is kept as a
     console/stream writer unless a filename is passed in, which swaps the stream
@@ -103,22 +102,34 @@ def _build_config(level, apps_list, verbose, filename=None):
     if verbose:
         config['handlers']['default']['formatter'] = 'verbose'
 
-    config['loggers'] = build_normalized_app_loggers(
-        level, apps_list)
+    config['loggers'] = build_app_loggers(level, apps_list)
 
     return config
 
 
-def configure_installed_apps_logger(level, verbose=False, filename=None):
+def configure_installed_apps_logger(level, verbose=False,
+                                    additional_packages=None, filename=None):
     """Builds and enables a logger with a logger list of the top-level list of
-    installed app modules (based on package name).  The logger will write either
+    installed app modules (based on package name) plus any additional
+    application packages passed in - for example, a user may want to log a
+    dependent package of one the installed apps.  The logger will write either
     to the console or to a file based on the presence of the filename parameter.
     Check that the LOGGING_CONFIG setting is None before we configure the logger
     in order to prevent maintaining Django's list of log handlers."""
     if settings.LOGGING_CONFIG:
         raise ImproperlyConfigured(LOGGING_CONFIG_ERROR_MSG)
 
-    config = _build_config(
-        level, settings.INSTALLED_APPS, verbose, filename)
+    app_set = _normalize_apps(settings.INSTALLED_APPS)
+    # Add any additional app modules to the set of apps we want to configure
+    if additional_packages:
+        # Make sure we're dealing with a list of additional apps before we
+        # convert to a set
+        if not isinstance(additional_packages, list):
+            additional_packages = list(additional_packages)
+        # Update the app set with these additional app modules
+        app_set.update(set(additional_packages))
+
+    config = _build_logging_config(
+        level, app_set, verbose, filename)
 
     logging.config.dictConfig(config)
