@@ -12,7 +12,7 @@ install_requires = ['django']
 
 setup(
     name='dj-log-config-helper',
-    version='0.2.0',
+    version='0.2.1',
     url='https://github.com/Harvard-University-iCommons/dj-log-config-helper',
     author='Jaime Bermudez',
     author_email='jaime_bermudez@harvard.edu',
