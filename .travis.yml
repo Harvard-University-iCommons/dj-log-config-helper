@@ -3,11 +3,11 @@ python:
 - '2.7'
 sudo: false
 env:
-- DJANGO_VERSION=1.10.6
-- DJANGO_VERSION=1.9.12
-- DJANGO_VERSION=1.8.17
+- DJANGO_VERSION=">=1.8,<1.9"
+- DJANGO_VERSION=">=1.9,<1.10"
+- DJANGO_VERSION=">=1.10,<1.11"
 install:
-- pip install Django==$DJANGO_VERSION
+- pip install "Django$DJANGO_VERSION"
 script:
 - make test
 notifications:
@@ -15,9 +15,10 @@ notifications:
 deploy:
   provider: pypi
   user: tlt_opensource
+  distributions: sdist bdist_wheel
   password:
-    secure: EpwpuJyk4HydSAPdBwCULoC0BVUA3q+pxmQQIVmrHdDYroWVUfiFXL2tj9RhQa6zp9Xrwp8naz97Hp8lhFwi+jNeq4ZLSTD1UMvvcP+H8ncFWe/nEwmJs/89GRegyV/dtEYAIM7vp0AIGldHcaFh9pzItuNLBdsuybwGzLoRgidXnNu3qKzFJKaOZV8SNjoBzm2NdMbo+NWOr/btgng3p1jGZEMgh52riROwUYx8SUGjieJuQ86FlOIET3OVZ9bY0kmvNRzMe1XqQP+eSCvE9PrmycvY4V2RtmXzqPfvgYXn+MdWz2imeoxvNt1FV4UjJZUyG3dvMsk2H23jEzwhU3e7b9wE7V8TMWEFVgE98vW6a0HHbWLNBMZEaBMMzCYTwMZ69Ojjtelt5dNmLKpmFjN2Pg/RDZsSZ7b4vav/9ktDCFaLbY3mAq7MRMU8nrE+mlzcrPeNtn/jvfKlKYTnFhZg9gTqBoJKlhlY2z+XBRP4lZgBM3hGT85aE5IXWMrPsnhIbOWjpUSH5CMZUTXOSyFWXYjG/nteygwCzn6DISrpd2qApHrlhDCiJdG/0tQ+D6EilpXuCRCSNb3hyA5tEFUZznwsn7gnraFBulDwNFhw9wdket6SYzlD+BtbAaAoLw9PhPIrg+81XwTcnrSPdN1qpXZTmMg3a+RPfkjKdZI=
+    secure: "FpeaTjuWpwgWUJ/FagTc7FJtIBCHRufOnDHsI8s8W8gu3EDrcIqCohbAOkEBUM2WCI2wzmhNHYciRXQQQnLdGyJvbOf9XKG2yoo4QDgEQ8en+i0dgoqUag5deXfH6kxjBzpaBAN9vX9pervEJa51pR3ci1qnMU51UdsBWuY2vUC3ez5+F8BsMnRq95mVypSnJLz8holg4hoC7x6utsxtk7lwJCnlheNOGW+aodzldaRsrAPCUq+NpsGIxjKF0JV1XvhNsiGODHjDrWVWsZo/gBPjMu18b/q4O/9AMBl0uMv3unVXroCyber9T8UkHnQepYQlFiVZAj4lbGUEFKr+gZH3EyntfB23XWMYA/eQ+6YM4d2rjNY+W0EQqMkhJnkSlqf31qqhAPP2XN8rIjRiFd1dFCeS3R971YpGnzS4hxB+G2yjgXfUY/JoFG22SNACSyLvzS90txiBf/MIWVnTV+jDSOrfUBEp/AQ0NNAAvUwA26AlHxeBSqaZEPMwfdOP9OSFbBx8z84yUxFfkfxxsLP37ow2yW38CWYQEtV9jKIpvj0D6KiIpMJgCcE7TTIFaVkbbsVo9pGPWwcSiMxC6RA7KXHPuOTGulDFPexwqaVq3Fx3lXoFFcevB02RkfT2NwiEMR+2Zxilry/0yj3l8ngZIqm6JKaI2EnVvgGPYU4="
   on:
     tags: true
-    distributions: sdist bdist_wheel
     branch: master
+    condition: $DJANGO_VERSION = ">=1.10,<1.11"
